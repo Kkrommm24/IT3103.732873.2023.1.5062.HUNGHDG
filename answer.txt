@@ -1,0 +1,12 @@
+1. Is JAVA a Pass by Value or a Pass by Reference programming language?
+Java là ngôn ngữ lập trình Pass by Value. 
+
+2. After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
+Vì Java là ngôn ngữ lập trình Pass by Value, nên khi ta đổi chỗ tham chiếu o1 và o2 thì không ảnh hưởng đến các đối tượng gốc ở ngoài phương thức. Trong Java, tham số được truyền theo giá trị, và khi truyền tham chiếu đối tượng, ta đang truyền bản sao của tham chiếu, không phải đối tượng thực sự. Do đó, việc đổi chỗ tham chiếu trong phương thức không ảnh hưởng đến tham chiếu ngoài phương thức.
+
+3. After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
+Vì Java là ngôn ngữ lập trình Pass by Value, giá trị nguyên bản của tham chiếu đuợc truyền tới changeTitle() và được trỏ vào bởi bản sao của đối tượng
+Hàm changeTitle() sau đó áp dụng một phương thức của đối tượng lên chính nó, dẫn đến việc thay đổi tiêu đề của đối tượng. Cũng lưu ý rằng tham chiếu chính thức đã thay đổi thành một đối tượng mới với tiêu đề cũ. Tuy nhiên, đối tượng thực tế không thay đổi. Tham chiếu thực tế vẫn trỏ đến đối tượng đó, mà tiêu đề đã được thay đổi. Điều này có nghĩa là khi chúng ta lấy tiêu đề từ jungleDVD, chúng ta sẽ thấy nó đã được thay đổi.
+
+4. Write a toString() method for the DigitalVideoDisc class. What should be the return type of this method?
+Kiểu trả về sẽ là String
