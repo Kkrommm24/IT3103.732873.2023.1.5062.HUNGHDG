@@ -1,12 +1,13 @@
-1. Is JAVA a Pass by Value or a Pass by Reference programming language?
-Java là ngôn ngữ lập trình Pass by Value. 
+1. Cart là tổng hợp của đối tượng Media. Store cũng là tổng hợp của đối tượng Media. CompactDisc là tổng hợp của đối tượng Track.
 
-2. After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
-Vì Java là ngôn ngữ lập trình Pass by Value, nên khi ta đổi chỗ tham chiếu o1 và o2 thì không ảnh hưởng đến các đối tượng gốc ở ngoài phương thức. Trong Java, tham số được truyền theo giá trị, và khi truyền tham chiếu đối tượng, ta đang truyền bản sao của tham chiếu, không phải đối tượng thực sự. Do đó, việc đổi chỗ tham chiếu trong phương thức không ảnh hưởng đến tham chiếu ngoài phương thức.
+2. Nếu đối tượng truyền vào không phải là một phiên bản của Media, phương thức equals() sẽ trả về giá trị false.
 
-3. After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
-Vì Java là ngôn ngữ lập trình Pass by Value, giá trị nguyên bản của tham chiếu đuợc truyền tới changeTitle() và được trỏ vào bởi bản sao của đối tượng
-Hàm changeTitle() sau đó áp dụng một phương thức của đối tượng lên chính nó, dẫn đến việc thay đổi tiêu đề của đối tượng. Cũng lưu ý rằng tham chiếu chính thức đã thay đổi thành một đối tượng mới với tiêu đề cũ. Tuy nhiên, đối tượng thực tế không thay đổi. Tham chiếu thực tế vẫn trỏ đến đối tượng đó, mà tiêu đề đã được thay đổi. Điều này có nghĩa là khi chúng ta lấy tiêu đề từ jungleDVD, chúng ta sẽ thấy nó đã được thay đổi.
+3. Vì lớp Book, CompactDisc và DigitalVideoDisc đều kế thừa từ lớp Media, nên các đối tượng book, cd, dvd cũng là các phiên bản của lớp Media. Nhưng ở lớp Book và CompactDisc ta chưa ghi đè hàm toString() nên chương trình sẽ hiện biểu diễn măc định của hàm toString().
 
-4. Write a toString() method for the DigitalVideoDisc class. What should be the return type of this method?
-Kiểu trả về sẽ là String
+4. Lớp Media triển khai giao diện Comparable.
+
+5. Phương thức compareTo() cần trả về một số nguyên âm, số 0, hoặc một số nguyên dương nếu đối tượng hiện tại nhỏ hơn, bằng, hoặc lớn hơn đối tượng được chỉ định, tương ứng.
+
+6. Không, vì giao diện Comparable được sử dụng cho so sánh nội bộ và chỉ có thể được triển khai một lần bởi lớp Media.
+
+7. Tôi ghi đè phương thức compareTo() trong lớp DigitalVideoDisc.

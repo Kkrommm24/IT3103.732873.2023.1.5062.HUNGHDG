@@ -1,6 +1,6 @@
 package hust.soict.dsai.test.store;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 import hust.soict.dsai.aims.store.Store;
 
 public class StoreTest {
@@ -11,12 +11,12 @@ public class StoreTest {
 	        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation",
 	                "Roger Allers", 87, 19.95f);
 	        //Test addDVD method
-	        store.addDVD(dvd1);
-	        store.print();
+	        store.addMedia(dvd1);
+	        store.displayStore();
 
 	        //Test removeDVD method
-	        store.removeDVD(dvd1);
-	        store.print();
+	        store.removeMedia(dvd1);
+	        store.displayStore();
 	    }
 
 }

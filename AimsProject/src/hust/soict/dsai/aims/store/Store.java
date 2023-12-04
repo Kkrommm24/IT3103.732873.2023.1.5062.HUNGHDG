@@ -1,43 +1,44 @@
 package hust.soict.dsai.aims.store;
 import java.util.ArrayList;
-
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.Media;
 public class Store {
-	private ArrayList<DigitalVideoDisc> itemsInStore = new ArrayList<DigitalVideoDisc>();
-    public ArrayList<DigitalVideoDisc> getItemsInStore() {
+	private ArrayList<Media> itemsInStore = new ArrayList<Media>();
+    public ArrayList<Media> getItemsInStore() {
         return itemsInStore;
     }
 
-    public int addDVD(DigitalVideoDisc disc){
-        itemsInStore.add(disc);
-        System.out.println("The DVD has been added");
-        return 1;
+    public boolean addMedia(Media m){
+        return itemsInStore.add(m);
     }
 
-    public int removeDVD(DigitalVideoDisc disc){
-        if(itemsInStore.contains(disc)){
-            itemsInStore.remove(disc);
-            System.out.println("The DVD has been removed");
-            return 1;
+    public boolean removeMedia(Media m) {
+        if (itemsInStore.contains(m)) {
+            itemsInStore.remove(m);
+            return true;
+        } else {
+            return false;
         }
-        System.out.println("The DVD is not in the store");
-        return 0;
     }
-    public void print() {
-        System.out.println("***********************STORE***********************");
-        System.out.println("Store Items:");
-        for (DigitalVideoDisc d : itemsInStore) {
-            if(d != null) {
-            	System.out.println(d);
+    public void displayStore() {
+        for (Media media : itemsInStore) {
+            System.out.println(media.toString());
+        }
+    }
+    
+    public Media searchInStore(String title) {
+        for (Media m: itemsInStore){
+            if(m.isMatch(title)){
+                return m;
             }
         }
-        System.out.println("***************************************************");
+        return null;
     }
 
-    public DigitalVideoDisc getDvd(String title) {
-        for (DigitalVideoDisc disc : itemsInStore) {
-            if (disc.getTitle().equals(title)) {
-                return disc;
+    public Media getMedia(String title) {
+        for (Media m : itemsInStore) {
+            if (m.getTitle().equals(title)) {
+            	System.out.println(m);
+                return m;
             }
         }
         return null;

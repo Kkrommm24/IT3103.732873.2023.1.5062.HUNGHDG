@@ -1,7 +1,7 @@
 package hust.soict.dsai.test.cart;
 
 import hust.soict.dsai.aims.cart.Cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
 
 public class CartTest {
 
@@ -16,11 +16,11 @@ public class CartTest {
 	        cart.addDigitalVideoDisc(dvd1);
 	        cart.addDigitalVideoDisc(dvd2);
 	        cart.addDigitalVideoDisc(dvd3);
-	        cart.print();
-	        cart.searchDVDById(1);
-	        cart.searchDVDById(4);
-	        cart.searchDVDByTitle("The Lion King");
-	        cart.searchDVDByTitle("HungHDG5062");
+//	        cart.print();
+//	        cart.searchDVDById(1);
+//	        cart.searchDVDById(4);
+//	        cart.searchDVDByTitle("The Lion King");
+//	        cart.searchDVDByTitle("HungHDG5062");
 	    }
 	 
 }
