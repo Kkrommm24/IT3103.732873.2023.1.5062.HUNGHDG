@@ -1,6 +1,10 @@
 package hust.soict.dsai.aims.media;
 
+import hust.soict.dsai.aims.exception.PlayerException;
+
 public class DigitalVideoDisc extends Disc implements Playable {
+	private String director;
+    private int length;
 	private static int nbDigitalVideoDiscs = 0;
 	
 	public String getDirector() {
@@ -18,43 +22,26 @@ public class DigitalVideoDisc extends Disc implements Playable {
         this.length = length;
     }
 	
-	 // Constructor 1: Create a DVD object by title
     public DigitalVideoDisc(String title) {
-        this.title = title;
-        this.id = ++nbDigitalVideoDiscs;
+        super(title);
+        nbDigitalVideoDiscs++;
     }
-
-    // Constructor 2: Create a DVD object by category, title, and cost
-    public DigitalVideoDisc(String title , String category, float cost) {
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        this.id = ++nbDigitalVideoDiscs;
+    public DigitalVideoDisc(String title, String category, float cost) {
+        super(title, category, cost);
+        nbDigitalVideoDiscs++;
     }
-
-	// Constructor 3: Create a DVD object by director, category, title, and cost
-    public DigitalVideoDisc(String director, String category, String title, float cost) {
+    public DigitalVideoDisc(String title, String category, String director, float cost) {
+        super(title, category, cost);
         this.director = director;
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        this.id = ++nbDigitalVideoDiscs;
+        nbDigitalVideoDiscs++;
     }
-
-    // Constructor 4: Create a DVD object by all attributes: title, category, director, length, and cost
     public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this.title = title;
-        this.category = category;
+        super(title, category, cost);
         this.director = director;
         this.length = length;
-        this.cost = cost;
-        this.id = ++nbDigitalVideoDiscs;
+        nbDigitalVideoDiscs++;
     }
     
-    //// Constructor 5:
-    public DigitalVideoDisc(int id, String title, String category, float cost, int length, String director) {
-		super(id, title, category, cost, length, director);
-	}
 	public void printDetail(){
         System.out.println("------ DigitalVideoDisc Detail ------");
         System.out.println(title + " " + " " + category + " " + director + " " + length + " " + cost);
@@ -75,8 +62,16 @@ public class DigitalVideoDisc extends Disc implements Playable {
     }
     
     @Override
-    public void play() {
-        System.out.println("Playing DVD: " + this.getTitle());
-        System.out.println("DVD length: " + this.getLength());
+    public StringBuffer play() throws PlayerException {
+        if (this.getLength() > 0) {
+            System.out.println("Playing DVD: " + this.getTitle());
+            System.out.println("DVD length: " + this.getLength());
+
+            StringBuffer info = new StringBuffer("");
+            info.append("Playing DVD: " + this.getTitle() + "\n" + "DVD length: " + this.getLength());
+            return info;
+        } else {
+            throw new PlayerException("ERROR: DVD length is non-positive!");
+        }
     }
 }

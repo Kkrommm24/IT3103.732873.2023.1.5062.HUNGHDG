@@ -1,5 +1,6 @@
 package hust.soict.dsai.aims.media;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -11,6 +12,10 @@ public abstract class Media {
 	protected String title;
 	protected String category;
 	protected float cost;
+	private LocalDate dateAdded;
+	
+	private static int nbMedia = 0;
+	
 	public static final Comparator<Media> COMPARE_BY_TITLE_COST =
 	        new MediaComparatorTitleCost()
             .thenComparing(Media::getCost);;
@@ -20,12 +25,21 @@ public abstract class Media {
 	public Media () {
     }
 
-    public Media(int id, String title, String category, float cost) {
-        this.id = id;
+	public Media(String title) {
+        this.title = title;
+        this.dateAdded = LocalDate.now();
+        nbMedia++;
+        this.id = nbMedia;
+    }
+    public Media(String title, String category, float cost) {
         this.title = title;
         this.category = category;
         this.cost = cost;
+        this.dateAdded = LocalDate.now();
+        nbMedia++;
+        this.id = nbMedia;
     }
+
 	public int getId() {
 		return id;
 	}
@@ -53,20 +67,33 @@ public abstract class Media {
 	
 	@Override
 	public boolean equals(Object o) {
-	    if (this == o) {
-	        return true;
-	    }
-	    if (o == null || getClass() != o.getClass()) {
-	        return false;
-	    }
-	    if (!(o instanceof Media)) {
-	        return false;
-	    }
+        try {
+            return ((Media)o).getId() == this.id;
+        } catch (NullPointerException e) {
+            return false;
+        } catch (ClassCastException e1) {
+            return false;
+        }
 
-	    Media media = (Media) o;
-	    return Objects.equals(title, media.title);
-	}
+    }
 	
 	public abstract boolean isMatch(String title);
+	
+	public boolean filterProperty(String filter, String type) {
+        if (filter == null || filter.isEmpty()) {
+            return true;
+        } else {
+            if (type == "title") {
+                if (this.getTitle().toLowerCase().indexOf(filter.toLowerCase()) != -1) {
+                    return true;
+                }
+            } else if (type == "id") {
+                if(Integer.toString(this.getId()).toLowerCase().indexOf(filter.toLowerCase()) != -1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 	
 }

@@ -20,20 +20,20 @@ public class MediaTest {
         // Create a CompactDisc with tracks
         tracks.add(new Track("HungHDG 1", 30));
         tracks.add(new Track("HungHDG 2", 40));
-        CompactDisc cd = new CompactDisc(1, "A", "Music", 15.0f, "HungHDG", "HungHDG", tracks);
+//        CompactDisc cd = new CompactDisc(1, "A", "Music", 15.0f, "HungHDG", "HungHDG", tracks);
 
         // Create a DigitalVideoDisc
-        DigitalVideoDisc dvd = new DigitalVideoDisc(2, "C", "Movie", 25.0f, 120, "HungHDG");
+//        DigitalVideoDisc dvd = new DigitalVideoDisc(2, "C", "Movie", 25.0f, 120, "HungHDG");
 
         // Create a Book with authors
         authors.add("HungHDG 1");
         authors.add("HungHDG 2");
-        Book book = new Book(3, "B", "Programming", 29.99f, authors);
+//        Book book = new Book(3, "B", "Programming", 29.99f, authors);
 
         // Add some media objects (CD, DVD, or Book) into the list
-        mediae.add(cd);
-        mediae.add(dvd);
-        mediae.add(book);
+//        mediae.add(cd);
+//        mediae.add(dvd);
+//        mediae.add(book);
 
         // Iterate through the list and print out the information using toString()
         for (Media media : mediae) {

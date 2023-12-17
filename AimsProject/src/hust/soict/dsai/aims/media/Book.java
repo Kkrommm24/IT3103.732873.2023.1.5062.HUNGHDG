@@ -3,65 +3,90 @@ import java.util.*;
 
 public class Book extends Media {
 	private List<String> authors = new ArrayList<String>();
-	
+	private int length;
+	private String content;
+    private ArrayList<String> contentTokens;
+    private Map<String, Integer> wordFrequency = new TreeMap<String, Integer>();
 	public Book() {
 		
 	}
-	public Book(String title) {
-		this.title = title;
-	}
+	public Book(String title, int length) {
+        super(title);
+        this.length = length;
+    }
+    public Book(String title, String category, float cost, int length) {
+        super(title, category, cost);
+        this.length = length;
+    }
+    public Book(String title, String category, float cost) {
+        super(title, category, cost);
+    }
+    public Book(String title, String category, float cost, List<String> authors, int length, String content) {
+        super(title, category, cost);
+        this.authors = authors;
+        this.length = length;
 
-	public Book(int id, String title, String category, float cost, List<String> authors) {
-		super(id, title, category, cost);
-		this.authors = authors;
-	}
-	public List<String> getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(List<String> authors) {
-		this.authors = authors;
-	}
-	
-	// add author
-	public boolean addAuthor(String authorName) {
-        if(authors.contains(authorName)){
-            return false;
-        } else {
-            authors.add(authorName);
-            return true;
-        }
+        this.content = content;
+        processContent();
     }
 	
-	//remove author
-    public boolean removeAuthor(String authorName) {
-        if(authors.contains(authorName)){
-            authors.remove(authorName);
-            return true;
+    public List<String> getAuthors() {
+        return authors;
+    }
+    public int getLength() {
+        return this.length;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+    public void setContent(String content) {
+        this.content = content;
+        processContent();
+    }
+    public Map<String, Integer> getWordFrequency() {
+        return this.wordFrequency;
+    }
+	// add author
+    public void addAuthor(String authorName) {
+        if (authors.contains(authorName)) {
+            System.out.println("This author has already been in the list");
         } else {
-            return false;
+            authors.add(authorName);
+        }
+    }
+    // remove author
+    public void removeAuthor(String authorName) {
+        if (authors.contains(authorName)) {
+            authors.remove(authorName);
+        } else {
+            System.out.println("This author is not in the list");
         }
     }
     
     @Override
     public String toString(){
-        StringBuffer printBook = new StringBuffer();
-        printBook.append(id);
-        printBook.append(" - ");
-        printBook.append("Book");
-        printBook.append(" - ");
-        printBook.append(title);
-        printBook.append(" - ");
-        printBook.append(category);
-        printBook.append(": ");
-        printBook.append(cost);
-        printBook.append(" $");
-        return  printBook.toString();
+    	return this.id + ". " + this.getTitle() + " - " + this.getCategory() + " - " + this.authors
+                + " - " + this.length + ": " + this.getCost() + " $" + "\n" + content;
     }
 
     @Override
     public boolean isMatch(String title){
     	System.out.println(title);
         return this.title.equals(title);
+    }
+    
+    public void processContent() {
+        this.contentTokens = new ArrayList<String>(Arrays.asList(this.content.split(" ")));
+        Collections.sort(contentTokens);
+
+        for (String token : this.contentTokens) {
+            if (wordFrequency.get(token) == null) {
+                wordFrequency.put(token, 1);
+            } else {
+                wordFrequency.put(token, (wordFrequency.get(token) + 1));
+            }
+        }
+
     }
 }
